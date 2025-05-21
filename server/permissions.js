@@ -30,7 +30,7 @@ module.exports = [
   {
     key: process.env.TOKEN_4,
     discordID: "0",
-    nameColor: "#9e0bd1",
+    nameColor: "#ffffff",
     class: "developer",
     administrator: true,
     bypassChatSanitizer: true,
