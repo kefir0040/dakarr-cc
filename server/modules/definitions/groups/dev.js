@@ -144,8 +144,8 @@ Class.rammers.PROPS = [
 Class.terrestrials = menu("Terrestrials", "orange", 7)
 Class.celestials = menu("Celestials", "lightGreen", 9)
 Class.eternals = menu("Eternals", "veryLightGrey", 11)
-//Class.devBosses = menu("Developers", "lightGreen", 4)
-//Class.devBosses.UPGRADE_COLOR = "rainbow"
+Class.devBosses = menu("Developers", "lightGreen", 4)
+Class.devBosses.UPGRADE_COLOR = "rainbow"
 
 Class.tanks = menu("Tanks")
 Class.unavailable = menu("Unavailable")
