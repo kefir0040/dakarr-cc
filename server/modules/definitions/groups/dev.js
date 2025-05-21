@@ -168,7 +168,7 @@ Class.sanctuaries.PROPS = [
 ]
 
 // Generators
-/*function compileMatrix(matrix, matrix2Entrance) {
+function compileMatrix(matrix, matrix2Entrance) {
     let matrixWidth = matrix[0].length,
         matrixHeight = matrix.length;
     for (let x = 0; x < matrixWidth; x++) for (let y = 0; y < matrixHeight; y++) {
@@ -325,7 +325,7 @@ for (let x = 0; x < tensorWidth; x++) {
             }
         }
     }
-}*/
+}
 
 // Testing tanks
 /*Class.diamondShape = {
@@ -2715,7 +2715,7 @@ Class.flace = {
     SKILL_CAP: [dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl],
 }
 
-Class.developer.UPGRADES_TIER_0 = ["tanks", "bosses", "spectator", "levels", "teams", "testing", "addons"]
+Class.developer.UPGRADES_TIER_0 = ["tanks", "bosses", "spectator", "levels", "teams", "testing", "addons", "eggGenerator"]
     Class.tanks.UPGRADES_TIER_0 = ["basic", "unavailable", "arenaCloser", "dominators", "sanctuaries", "mothership", "baseProtector", "antiTankMachineGun"]
         Class.unavailable.UPGRADES_TIER_0 = ["flail", "jumpSmasher", "healer", "literallyAMachineGun", "literallyATank", "master", "volute", "whirlwind"]
             Class.flail.UPGRADES_TIER_2 = ["doubleFlail", "mace", "flangle"]
