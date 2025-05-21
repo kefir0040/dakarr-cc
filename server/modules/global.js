@@ -140,7 +140,8 @@ global.ensureIsClass = str => {
         return Class[str];
     }
     console.log('Definitions:' + Object.keys(Class));
-    throw Error(`Definition ${str} is attempted to be gotten but does not exist!`);
+    console.warn(`Definition ${str} is attempted to be gotten but does not exist!`);
+    return Class.basic;
 }
 global.makeHitbox = wall => {
     const _size = wall.size + 4;
