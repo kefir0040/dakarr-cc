@@ -6,7 +6,7 @@ module.exports = {
     host: "dakarr.cc",
 
     // Which port to run the web server on.
-    port: 80,
+    port: 3000,
 
     // How many connections are allowed per IP address.
     connectionsPerIp: 1,

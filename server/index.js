@@ -9,7 +9,7 @@ for (let key in enviroment) {
 const GLOBAL = require("./modules/global.js");
 
 console.log(`[${GLOBAL.creationDate}]: Server initialized.\nRoom Info:\n Dimensions: ${room.width} x ${room.height}`);
-require("./bot.js");
+//require("./bot.js");
 // Let's get a cheaper array removal thing
 Array.prototype.remove = function (index) {
     if (index === this.length - 1) return this.pop();
