@@ -1141,5 +1141,9 @@ module.exports = ({ Config, Events }) => {
   log("Commands loaded!");
   chatCommandsLoaded = true;
 };
-    commands.add(['playerlist', 'players'], [0, 50] { doc: 'List all players, their entity ids and their tanks.\nDoc: /playerlist [(name/label) (includes/stars/ends/matches) NAMEORLABEL ...]\nNOTE: if less than three arguments are provided, it returns all players', perms: 'modCommands' }, ({ command, args }) => {
+    commands.add(['playerlist', 'players'], [0, 50], { doc: 'List all players, their entity ids and their tanks.\nDoc: /playerlist [(name/label) (includes/stars/ends/matches) NAMEORLABEL ...]\nNOTE: if less than three arguments are provided, it returns all players', perms: 'modCommands' }, ({ command, args }) => {
       let playerEntities;
+      
+       if (args.count > 1) {
+           playerEntities = getPlayerEntities(args.getString(0), args.getString(1), args.silence(2));
+       }  else {
