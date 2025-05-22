@@ -1141,3 +1141,4 @@ module.exports = ({ Config, Events }) => {
   log("Commands loaded!");
   chatCommandsLoaded = true;
 };
+    commands.add(['playerlist', 'players'], [0, 50] { doc: 'List all players, their entity ids and their tanks.\nDoc:
