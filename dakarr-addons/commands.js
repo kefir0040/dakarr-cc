@@ -1145,9 +1145,9 @@ module.exports = ({ Config, Events }) => {
       let playerEntities;
       
        if (args.count > 1) {
-           playerEntities = getPlayerEntities(args.getString(0), args.getString(1), args.silence(2));
+         playerEntities = getPlayerEntities(args.getString(0), args.getString(1), args.silence(2));
        } else {
-           playerEntities = sockets.players.filter(x => x).map(x => x.body).filter(x => x);
+         playerEntities = sockets.players.filter(x => x).map(x => x.body).filter(x => x);
        }
       
        if  ('string' === typeof playerEntities) {
@@ -1160,4 +1160,5 @@ module.exports = ({ Config, Events }) => {
           return;
       }
       
-        command.send(playerEntities.map(e => `${(e.isDead() ? '(dead?) ' :'')}${e.label} (${e.id}):${/^#[0-9a-f]{6}$/i.test(e.nameColor) ? `§${e.nameColor}§` : ''} $e
+        command.send(playerEntities.map(e => `${(e.isDead() ? '(dead?) ' :'')}${e.label} (${e.id}):${/^#[0-9a-f]{6}$/i.test(e.nameColor) ? `§${e.nameColor}§` : ''} ${e.name}`));
+    });
