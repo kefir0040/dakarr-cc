@@ -1184,3 +1184,12 @@ commands.add(
     );
   }
 );
+
+commands.add(["clear_walls", "cw"], 0, { doc: "Clear walls\nDoc: /cw" }, () => {
+  entities
+    .filter((e) => e.type == "wall" && e.shapeData == 4)
+    .forEach((e) => {
+      e.destroy();
+    });
+  command.send(`Cleared all walls from the arena.`);
+});
