@@ -9,7 +9,7 @@ module.exports = {
   port: 3000,
 
   // How many connections are allowed per IP address.
-  connectionsPerIp: 1,
+  connectionsPerIp: 2,
 
   // How often to update the list of the entities that players can see.
   // Has effects of when entities are activated.
