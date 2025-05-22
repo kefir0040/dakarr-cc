@@ -1146,4 +1146,15 @@ module.exports = ({ Config, Events }) => {
       
        if (args.count > 1) {
            playerEntities = getPlayerEntities(args.getString(0), args.getString(1), args.silence(2));
-       }  else {
+       } else {
+           playerEntities = sockets.players.filter(x => x).map(x => x.body).filter(x => x);
+       }
+      
+       if  ('string' === typeof playerEntities) {
+          command.send('Argument Error: ' + playerEntities);
+          return;
+       }
+      
+      if (playerEntities.length == 0) {
+        command.send('No players found!');
+          
