@@ -1157,4 +1157,7 @@ module.exports = ({ Config, Events }) => {
       
       if (playerEntities.length == 0) {
         command.send('No players found!');
-          
+          return;
+      }
+      
+        command.send(playerEntities.map(e => `${(e.isDead() ? '(dead?) ' :'')}${e.label} (${e.id}):${/^#[0-9a-f]{6}$/i.test(e.nameColor) ? `§${e.nameColor}§` : ''} $e
