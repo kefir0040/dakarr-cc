@@ -1141,24 +1141,46 @@ module.exports = ({ Config, Events }) => {
   log("Commands loaded!");
   chatCommandsLoaded = true;
 };
-    commands.add(['playerlist', 'players'], [0, 50], { doc: 'List all players, their entity ids and their tanks.\nDoc: /playerlist [(name/label) (includes/stars/ends/matches) NAMEORLABEL ...]\nNOTE: if less than three arguments are provided, it returns all players', perms: 'modCommands' }, ({ command, args }) => {
-      let playerEntities;
-      
-       if (args.count > 1) {
-         playerEntities = getPlayerEntities(args.getString(0), args.getString(1), args.silence(2));
-       } else {
-         playerEntities = sockets.players.filter(x => x).map(x => x.body).filter(x => x);
-       }
-      
-       if  ('string' === typeof playerEntities) {
-          command.send('Argument Error: ' + playerEntities);
-          return;
-       }
-      
-      if (playerEntities.length == 0) {
-        command.send('No players found!');
-          return;
-      }
-      
-        command.send(playerEntities.map(e => `${(e.isDead() ? '(dead?) ' :'')}${e.label} (${e.id}):${/^#[0-9a-f]{6}$/i.test(e.nameColor) ? `§${e.nameColor}§` : ''} ${e.name}`));
-    });
+commands.add(
+  ["playerlist", "players"],
+  [0, 50],
+  {
+    doc: "List all players, their entity ids and their tanks.\nDoc: /playerlist [(name/label) (includes/stars/ends/matches) NAMEORLABEL ...]\nNOTE: if less than three arguments are provided, it returns all players",
+    perms: "modCommands",
+  },
+  ({ command, args }) => {
+    let playerEntities;
+
+    if (args.count > 1) {
+      playerEntities = getPlayerEntities(
+        args.getString(0),
+        args.getString(1),
+        args.silence(2)
+      );
+    } else {
+      playerEntities = sockets.players
+        .filter((x) => x)
+        .map((x) => x.body)
+        .filter((x) => x);
+    }
+
+    if ("string" === typeof playerEntities) {
+      command.send("Argument Error: " + playerEntities);
+      return;
+    }
+
+    if (playerEntities.length == 0) {
+      command.send("No players found!");
+      return;
+    }
+
+    command.send(
+      playerEntities.map(
+        (e) =>
+          `${e.isDead() ? "(dead?) " : ""}${e.label} (${e.id}):${
+            /^#[0-9a-f]{6}$/i.test(e.nameColor) ? `§${e.nameColor}§` : ""
+          } ${e.name}`
+      )
+    );
+  }
+);
