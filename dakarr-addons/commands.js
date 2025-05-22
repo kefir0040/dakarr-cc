@@ -1177,7 +1177,7 @@ commands.add(
     command.send(
       playerEntities.map(
         (e) =>
-          `${e.isDead() ? "(dead?) " : ""}${e.label} (${e.id}):${
+          `${e.isDead() ? "(dead?) " : ""}${e.label} (${tags.add(e)}):${
             /^#[0-9a-f]{6}$/i.test(e.nameColor) ? `§${e.nameColor}§` : ""
           } ${e.name}`
       )
