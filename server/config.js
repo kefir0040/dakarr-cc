@@ -34,7 +34,6 @@ module.exports = {
   // NOTE: These prefixes are only for categorisation, a room file would work the same regardless of its prefix. APS++ does nothing based on file name prefixes.
   ROOM_SETUP: ["map_2tdm_default"],
 
-
   // The dimensions of a single tile on the map.
   TILE_WIDTH: 500,
   TILE_HEIGHT: 500,
