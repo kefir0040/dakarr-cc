@@ -196,18 +196,18 @@ Class.transAlphaPentagon = makeRare("alphaPentagon", 4);
 Class.hexagon = {
     PARENT: "food",
     LABEL: "Hexagon",
-    VALUE: 3750,
+    VALUE: 500,
     SHAPE: 6,
     SIZE: 25,
     COLOR: "hexagon",
     BODY: {
-        DAMAGE: 16 * basePolygonDamage,
+        DAMAGE: 3 * basePolygonDamage,
         DENSITY: 8,
         HEALTH: 20 * basePolygonHealth,
-        RESIST: 130,
-        SHIELD: 5 * basePolygonHealth,
+        RESIST: 1.3,
+        SHIELD: 50 * basePolygonHealth,
         PENETRATION: 1.1,
-        PUSHABILITY: 0.5,
+        PUSHABILITY: 0,
         ACCELERATION: 0.003
 
     },
