@@ -133,7 +133,7 @@ Class.pentagon = {
     HEALTH: 10 * basePolygonHealth,
     RESIST: 30,
     PENETRATION: 1.1,
-    PUSHABILITY: 1,
+    PUSHABILITY: 0,
     ACCELERATION: 0.0035,
   },
   DRAW_HEALTH: true,
