@@ -444,8 +444,9 @@ function incoming(message, socket) {
             break;
         case "1":
             //suicide squad
-            if (player.body != null && !player.body.underControl) {
-                if (!player.body.invuln) return;
+            case "1":
+            //suicide squad
+            if (player.body != null) {
                 if (socket.expensivePacketTooFast()) return;
                 for (let i = 0; i < entities.length; i++) {
                     let instance = entities[i];
