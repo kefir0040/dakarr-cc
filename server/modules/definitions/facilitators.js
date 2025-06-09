@@ -81,6 +81,8 @@ exports.skillSet = (args) => {
 
 // functions
 exports.dereference = type => {
+    type = ensureIsClass(type);
+
     let output = JSON.parse(JSON.stringify(type));
     if (type.GUNS) {
         for (let i = 0; i < type.GUNS.length; i++) {
@@ -410,7 +412,7 @@ exports.makeRadialAuto = (type, options = {}) => {
     let turretIdentifier = type;
 
     if (!isTurret) {
-        type = exports.dereference(ensureIsClass(type));
+        type = exports.dereference(type);
 
         let extraStats = options.extraStats ?? [];
         if (!Array.isArray(extraStats)) {
@@ -473,7 +475,7 @@ exports.makeTurret = (type, options = {}) => {
     - independent: turret independence
     */
 
-    type = exports.dereference(ensureIsClass(type));
+    type = exports.dereference(type);
 
     let CONTROLLERS = [];
     if (options.canRepel) { // default false
@@ -487,11 +489,10 @@ exports.makeTurret = (type, options = {}) => {
     }
 
     let GUNS = type.GUNS;
-    let extraStats = options.extraStats ?? [];
+    let extraStats = options.extraStats ?? [g.autoTurret];
     if (!Array.isArray(extraStats)) {
         extraStats = [extraStats];
     }
-    extraStats.push(g.autoTurret);
     for (let gun of GUNS) {
         if (!gun.PROPERTIES) continue;
         if (!gun.PROPERTIES.SHOOT_SETTINGS) continue;
@@ -540,6 +541,35 @@ exports.addAura = (damageFactor = 1, sizeFactor = 1, opacity = 0.3, auraColor) =
             },
         ]
     };
+}
+exports.setTurretProjectileRecoil = (type, recoilFactor) => {
+    type = exports.dereference(type);
+
+    if (!type.GUNS) return;
+    
+    // Sets the recoil of each of the turret's guns to the desired value.
+    for (let gun of type.GUNS) {
+        if (!gun.PROPERTIES) continue;
+
+        // Set gun type to account for recoil factor
+        let finalType = gun.PROPERTIES.TYPE;
+        if (!Array.isArray(finalType)) {
+            finalType = [finalType, {}];
+        }
+        if (typeof finalType[1] != "object") {
+            finalType[1] = {};
+        }
+        // Set via BODY.RECOIL_FACTOR
+        if (!finalType[1].BODY) {
+            finalType[1].BODY = {};
+        }
+        finalType[1].BODY.RECOIL_MULTIPLIER = recoilFactor;
+
+        // Save changes
+        gun.PROPERTIES.TYPE = finalType;
+    }
+
+    return type;
 }
 
 // misc functions
@@ -623,7 +653,7 @@ class LayeredBoss {
             SHAPE: this.shape,
             COLOR: -1,
             INDEPENDENT: true,
-            CONTROLLERS: [["spin", { independent: true, speed: 0.02 / Config.runSpeed * (this.layerID % 2 ? -1 : 1) }]],
+            FACING_TYPE: ["spin", { speed: 0.02 / Config.runSpeed * (this.layerID % 2 ? -1 : 1) }],
             MAX_CHILDREN, 
             GUNS: [],
             TURRETS: [],
@@ -757,7 +787,7 @@ exports.makeCrasher = type => ({
         SPEED: 1 + 5 / Math.max(2, (type.PROPS.length ?? 0) + type.SHAPE),
         HEALTH: Math.pow(type.BODY.HEALTH, 2/3),
         DAMAGE: Math.pow(type.BODY.HEALTH, 1/3) * type.BODY.DAMAGE,
-        ACCELERATION: 1,
+        ACCELERATION: 5,
         PUSHABILITY: 0.5,
         DENSITY: 10
     },
@@ -773,7 +803,7 @@ exports.makeRare = (type, level) => {
         LABEL: ["Shiny", "Legendary", "Shadow", "Rainbow", "Trans"][level] + " " + type.LABEL,
         VALUE: [100, 500, 2000, 4000, 5000][level] * type.VALUE,
         SHAPE: type.SHAPE,
-        SIZE: type.SIZE + level,
+        SIZE: type.SIZE,
         COLOR: ["lightGreen", "teal", "darkGrey", "rainbow", "trans"][level],
         ALPHA: level == 2 ? 0.25 : 1,
         BODY: {
@@ -793,7 +823,7 @@ exports.makeLaby = (type, level, baseScale = 1) => {
     type = ensureIsClass(type);
     let usableSHAPE = Math.max(type.SHAPE, 3),
         downscale = Math.cos(Math.PI / usableSHAPE),
-        strengthMultiplier = 7.5 ** level;
+        strengthMultiplier = 5 ** level;
     return {
         PARENT: "food",
         LABEL: ["", "Beta ", "Alpha ", "Omega ", "Gamma ", "Delta "][level] + type.LABEL,
