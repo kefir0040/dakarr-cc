@@ -26,17 +26,17 @@ module.exports = {
 
   // The \modules\setup\gamemodeconfigs\ files to load.
   // To change specific things about specific gamemodes (such as team count for tdm), edit their config file in \modules\setup\gamemodeconfigs\.
-  GAME_MODES: ["growth", "clanwars"],
+  GAME_MODES: ["growth", "assault"],
 
   // The room files to load in the setup/rooms folder.
   // NOTE: If a /gamemodeconfig/ file "replaces" the value of ROOM_SETUP, it just adds its own ROOM_SETUP's content to this array.
   // NOTE: Files starting with `map_` are maps. files starting with `overlay_` are overlays that get added on.
   // NOTE: These prefixes are only for categorisation, a room file would work the same regardless of its prefix. APS++ does nothing based on file name prefixes.
-  ROOM_SETUP: ["map_notch"],
+  ROOM_SETUP: ["map_assault_trenches"],
 
   // The dimensions of a single tile on the map.
-  TILE_WIDTH: 800,
-  TILE_HEIGHT: 800,
+  TILE_WIDTH: 500,
+  TILE_HEIGHT: 500,
 
   // Miscellaneous
 
@@ -155,7 +155,7 @@ module.exports = {
   FOOD_SPAWN_CHANCE: 0.15, // Likeliness of normal food spawn attempts succeeding.
   FOOD_SPAWN_COOLDOWN: 400, // Cooldown (in game ticks) of food spawn attempts being made.
 
-  FOOD_CAP_NEST: 3, // Max nest food per nest tile.
+  FOOD_CAP_NEST: 1, // Max nest food per nest tile.
   FOOD_SPAWN_CHANCE_NEST: 0.9, // Likeliness of nest food spawn attempts succeeding.
   FOOD_SPAWN_COOLDOWN_NEST: 60, // Cooldown (in game ticks) of nest food spawn attempts being made.
 
